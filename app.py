@@ -2,6 +2,7 @@ import gradio as gr
 import pandas as pd
 import pickle
 import numpy as np
+import os
 
 with open('best random forest.pkl', 'rb') as file:
     model = pickle.load(file)
@@ -54,4 +55,8 @@ demo = gr.Interface(
     title="Medical Insurance Cost Prediction",
 )
 
-demo.launch()
+if __name__ == "__main__":
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=int(os.environ.get("PORT", 10000))
+    )
